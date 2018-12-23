@@ -1,0 +1,50 @@
+version: "3"
+
+services:
+  php-fpm:
+    build: ./php-fpm
+    volumes:
+      - ../www/phalcon-micro:/www
+    networks: 
+      - link-bridge
+    
+  nginx:
+    image: nginx
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ../www/phalcon-micro:/www
+    networks:
+      - link-bridge
+    ports:
+      - "8080:8080"
+
+  mysql:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: cx654321
+    networks:
+      - link-bridge
+    volumes:
+      - mysql:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+    restart: always
+    ports:
+      - 8081:80
+    volumes:
+      - /sessions
+    networks:
+      - link-bridge
+
+networks:
+  link-bridge:
+
+volumes:
+  mysql:
