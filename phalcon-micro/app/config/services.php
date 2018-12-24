@@ -56,3 +56,11 @@ $di->setShared('db', function () {
     return $connection;
 });
 
+$di->setShared('redis', function () {
+    $config = $this->getConfig();
+
+    $redis = new Redis();
+    $redis->connect($config->redis->host, $config->redis->port);
+
+    return $redis;
+});

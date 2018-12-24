@@ -21,5 +21,10 @@ return new \Phalcon\Config([
         'migrationsDir'  => APP_PATH . '/migrations/',
         'viewsDir'       => APP_PATH . '/views/',
         'baseUri'        => '/phalcon-micro/',
+    ],
+
+    'redis' => [
+        'host' => 'redis',
+        'port' => 6379
     ]
 ]);

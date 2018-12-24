@@ -8,12 +8,22 @@
  * Add your routes here
  */
 $app->get('/', function () use($app) {
+    echo '<pre>';
+
+    echo "mysql test: \n";
     $sql = 'SELECT * FROM users';
     $users = $app->db->fetchAll($sql);
-    
-    echo '<pre>';
     var_export($users);
-    echo "\n" . date('Y-m-d H:i:s');
+    echo "\n\n";
+
+    echo "date test: \n";
+    echo date('Y-m-d H:i:s');
+    echo "\n\n";
+
+    echo "redis test: \n";
+    $app->redis->set('aaa', 123);
+    var_export($app->redis->get('aaa'));
+
 });
 
 /**

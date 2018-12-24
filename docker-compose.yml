@@ -42,6 +42,11 @@ services:
     networks:
       - link-bridge
 
+  redis:
+    image: redis
+    networks:
+      - link-bridge
+
 networks:
   link-bridge:
 
