@@ -26,6 +26,10 @@ $app->get('/', function () use($app) {
 
 });
 
+$app->get('/phpinfo', function () {
+    phpinfo();
+});
+
 /**
  * Not found handler
  */
